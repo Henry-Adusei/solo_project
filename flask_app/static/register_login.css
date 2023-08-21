@@ -1,1 +1,23 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: aqua;
+    height: 500px;
+}
 
+.login_input,
+.form_input {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    box-shadow: 3px 3px black;
+    margin-top: 10px;
+}
+
+#btn {
+    width: 70px;
+    margin-left: 100px;
+}
