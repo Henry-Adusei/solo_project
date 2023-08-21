@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='/edit_event.css')}}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="right_side">
+        <h1>Edit Event!</h1>
+        <a href="/all_events">All Events</a>
+        <a href="/logoff">Logout</a>
+    </div>
+    <div class="main">
+        <div class="update_event">
+            {%for one_event in one_event%}
+            <form action="/update/{{one_event.event_id}}" , method="POST">
+                <div class="flash_messages">
+                    {%with messages=get_flashed_messages()%}
+                    {%if messages%}
+                    {%for message in messages%}
+                    <strong>
+                        <p>{{message}}</p>
+                    </strong>
+                    {%endfor%}
+                    {%endif%}
+                    {%endwith%}
+                </div>
+                <div class="event_input">
+                    <div class="sub">
+                        <label for="event_title" name="event_title">Event Title:</label>
+                        <input type="text" name="event_title" for="event_title" id="event_title"
+                            value="{{one_event.event_title}}">
+                    </div>
+                    <div class="sub1">
+                        <label for="description" name="description">Description:</label>
+                        <textarea name="description" id="description" cols="30"
+                            rows="10">{{one_event.description}}</textarea>
+                    </div>
+                    <div class="sub2">
+                        <label for="location" name="location">Location</label>
+                        <input type="text" name="location" for="location" id="location" value="{{one_event.location}}">
+                    </div>
+                    <div class="sub3">
+                        <label for="date_time" name="date_time">Date and Time</label>
+                        <input type="datetime-local" name="date_time" id="date_time" for="date_time"
+                            value="{{one_event.date_time}}">
+                    </div>
+                    <a href="/all_events">
+                        <input type="submit" value="Update" name="update" id="update">
+                    </a>
+                </div>
+                {%endfor%}
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
