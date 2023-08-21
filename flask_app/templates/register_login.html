@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='/register_login.css')}}">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Event Planner!!!</h1>
+    <div class="main">
+        <div class="register">
+            <form action="/register" , method="POST">
+                <div>
+                    {%with messages=get_flashed_messages(category_filter='error1')%}
+                    {%if messages%}
+                    {%for message in messages%}
+                    <strong>
+                        <p>{{message}}</p>
+                    </strong>
+                    {%endfor%}
+                    {%endif%}
+                    {%endwith%}
+                </div>
+                <div class="form_input">
+                    <h2>Register</h2>
+                    <label for="first_name" name="first_name">First Name:</label>
+                    <input type="text" name="first_name" class="input">
+                    <label for="last_name" name="last_name">Last Name:</label>
+                    <input type="text" name="last_name" class="input">
+                    <label for="email" name="email">Email:</label>
+                    <input type="email" name="email" class="input" placeholder="Enter your email">
+                    <label for="password" name="password">Password:</label>
+                    <input type="password" name="password" class="input">
+                    <label for="confirm_password" name="confirm_password">Confirm Password:</label>
+                    <input type="password" name="confirm_password" class="input">
+                    <input type="submit" name="submit" class="btn" id="btn" value="Submit">
+                </div>
+            </form>
+        </div>
+        <div class="login">
+            <form action="/login" method="POST">
+                <div class="login_alerts">
+                    {%with messages=get_flashed_messages(category_filter='error2')%}
+                    {%if messages%}
+                    {%for message in messages%}
+                    <strong>
+                        <p>{{message}}</p>
+                    </strong>
+                    {%endfor%}
+                    {%endif%}
+                    {%endwith%}
+                </div>
+                <div class="login_input">
+                    <h3>Login</h3>
+                    <label for="email" name="email">Email</label>
+                    <input type="email" name="email" class="input">
+                    <label for="password" name="password">Password:</label>
+                    <input type="password" name="password" class="input">
+                    <input type="submit" name="submit" class="btn" id="btn">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
