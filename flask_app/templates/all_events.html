@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='/all_events.css')}}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="right_side">
+            <h1>Welcome to Event Planner {{user.first_name}}</h1>
+            <strong>
+                <p>View, Create, and RSVP to Events</p>
+            </strong>
+            <a href="/logoff">logout</a>
+        </div>
+        <div class="add_event">
+            <strong>
+                <p>Add your event</p>
+            </strong>
+            <form action="/add_event" , method="POST">
+                <div class="flash_messages">
+                    {%with messages=get_flashed_messages()%}
+                    {%if messages%}
+                    {%for message in messages%}
+                    <strong>
+                        <p>{{message}}</p>
+                    </strong>
+                    {%endfor%}
+                    {%endif%}
+                    {%endwith%}
+                </div>
+                <div class="event_inputs">
+                    <div class="sub">
+                        <label for="event_title" name="event_title">Event Title:</label>
+                        <input type="text" name="event_title" for="event_title" id="event_title">
+                    </div>
+                    <div class="sub1">
+                        <label for="description" name="description">Description:</label>
+                        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="sub2">
+                        <label for="location" name="location">Location</label>
+                        <input type="text" name="location" for="location" id="location">
+                    </div>
+                    <div class="sub3">
+                        <label for="date_time" name="date_time">Date and Time</label>
+                        <input type="datetime-local" name="date_time" id="date_time" for="date_time">
+                    </div>
+                    <input type="submit" value="Schedule Event" id="sub_btn">
+                </div>
+            </form>
+        </div>
+        <div class="body">
+            <h2>All Upcoming Events</h2>
+            <div class="events">
+                {%for event in all_events%}
+                <strong>
+                    <a href="/events/{{event['event_id']}}">
+                        {{event.event_title}}
+                    </a>
+                </strong>
+                {{event.description}}
+                <p>Meet at {{event.location}} -- {{event.date_time}}</p>
+                <p>
+                    {%if event.user_id==session.user_id%}
+                    <a href="/events/edit/{{event['event_id']}}">Edit|</a>
+                    <a href="/delete/{{event['event_id']}}">Delete</a>
+                    {%endif%}
+                </p>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
