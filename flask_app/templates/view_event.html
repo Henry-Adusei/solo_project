@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='/view_event.css')}}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="right_side">
+        <a href="/all_events">All Events</a>
+        <a href="/logout">Logoff</a>
+    </div>
+    {%for event in one_event%}
+    <div class="event_info">
+        <h1>{{event.event_title}}</h1>
+        <h2>Description: </h2>
+        <strong>
+            <h3>{{event.description}}</h3>
+        </strong>
+        <h2>Location: </h2>
+        <strong>
+            <h3>
+                {{event.location}}
+            </h3>
+        </strong>
+        <h2>Date and time: </h2>
+        <strong>
+            <h3>{{event.date_time}}</h3>
+        </strong>
+    </div>
+    {%endfor%}
+</body>
+
+</html>
